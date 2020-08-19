@@ -1,0 +1,64 @@
+
+server:
+  port: 8781
+
+#指定注册中心地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+#服务的名称
+spring:
+  application:
+    name: order-service
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 2000
+    #邮件服务
+  mail:
+    host: smtp.qq.com
+    username: 775134046@qq.com
+    password: rsvyilfjnkkhbeda
+
+#配置邮件发送方和接收方
+mail:
+  from: ${spring.mail.username}
+  to: lvzhiwei945@163.com
+
+#自定义负载均衡策略
+#product-service:
+  #ribbon:
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
+
+
+#修改调用超时时间
+feign:
+  #新版默认关闭，所以要用断路器必须开启
+  hystrix:
+    enabled: true
+  #feign集成ribbon的超时设置（当feign的断路器为开启的状态，则超时时间以hystrix为准）
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 2000
+
+
+
+hystrix:
+  command:
+    default:
+      #设置超时时间（hystrix超时时间默认为1秒）
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+        #把hystrix超时时间禁用（不推荐）
+        #timeout:
+          #enabled: false
+
