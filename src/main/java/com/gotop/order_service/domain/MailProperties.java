@@ -27,8 +27,4 @@ public class MailProperties {
     public void setTo(String to) {
         this.to = to;
     }
-
-    public void setTo3(String to) {
-        this.to = to;
-    }
 }
